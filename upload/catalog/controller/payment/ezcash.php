@@ -1,13 +1,15 @@
 <?php
 class ControllerPaymentEzcash extends Controller {
-private $test_order_id=3435;
+private $test_order_id=1; // in live mode
 	protected function index() {
 		$this->data['button_confirm'] = $this->language->get('button_confirm');
 
 		$this->load->model('checkout/order');
 
 		$order_info = $this->model_checkout_order->getOrder($this->session->data['order_id']);
-
+		if($this->config->get('ezcash_test')=='t'){
+			$this->test_order_id=$this->config->get('ezcash_test_order');
+		}
 		$this->data['merchant'] = $this->config->get('ezcash_merchant');
 		$this->data['trans_id'] = $this->session->data['order_id'];
 		$this->data['amount'] = $this->currency->format($order_info['total'], $order_info['currency_code'], $order_info['currency_value'], false);
@@ -97,6 +99,9 @@ EOD;
 	}
 
 	public function callback() {
+		if($this->config->get('ezcash_test')=='t'){
+			$this->test_order_id=$this->config->get('ezcash_test_order');
+		}
 		$decrypted = '';
 		$encrypted = $_POST['merchantReciept'];
 		$pkey = wordwrap($this->config->get('ezcash_pvt_key'), 65, "\n", true);
@@ -124,7 +129,6 @@ EOD;
 		$this->load->model('checkout/order'); // loading the checkout order
 
 		$order_info = $this->model_checkout_order->getOrder($order_id);
-
 		if ($order_info) {
 			$this->language->load('payment/ezcash');
 
@@ -147,7 +151,7 @@ EOD;
 			$this->data['text_failure'] = $this->language->get('text_failure');
 			$this->data['text_failure_wait'] = sprintf($this->language->get('text_failure_wait'), $this->url->link('checkout/cart'));
 
-			if (isset($statusCode) && $statusCode == 2 && $status) {
+			if ((isset($statusCode) && $statusCode == 2 && $status) || $this->config->get('ezcash_test')=='t') {
 				$this->load->model('checkout/order');
 
 				$this->model_checkout_order->confirm($order_id, $this->config->get('config_order_status_id'));

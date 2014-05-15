@@ -33,8 +33,12 @@ class ControllerPaymentEzcash extends Controller {
 		$this->data['entry_order_status'] = $this->language->get('entry_order_status');
 		$this->data['entry_geo_zone'] = $this->language->get('entry_geo_zone');
 		$this->data['entry_status'] = $this->language->get('entry_status');
+		$this->data['text_test_mode'] = $this->language->get('text_test_mode');
+		$this->data['text_live_mode'] = $this->language->get('text_live_mode');
 		$this->data['entry_sort_order'] = $this->language->get('entry_sort_order');
-
+		$this->data['entry_test_order'] = $this->language->get('entry_test_order');
+		$this->data['entry_test_order_note'] = $this->language->get('entry_test_order_note');		
+		
 		$this->data['button_save'] = $this->language->get('button_save');
 		$this->data['button_cancel'] = $this->language->get('button_cancel');
 
@@ -92,11 +96,17 @@ class ControllerPaymentEzcash extends Controller {
 		} else {
 			$this->data['ezcash_password'] = $this->config->get('ezcash_password');
 		}
-
+		
 		if (isset($this->request->post['ezcash_test'])) {
 			$this->data['ezcash_test'] = $this->request->post['ezcash_test'];
 		} else {
 			$this->data['ezcash_test'] = $this->config->get('ezcash_test');
+		}
+
+		if (isset($this->request->post['ezcash_test_order'])) {
+			$this->data['ezcash_test_order'] = $this->request->post['ezcash_test_order'];
+		} else {
+			$this->data['ezcash_test_order'] = $this->config->get('ezcash_test_order');
 		}
 
 		if (isset($this->request->post['ezcash_total'])) {

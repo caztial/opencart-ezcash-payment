@@ -17,6 +17,10 @@ $_['entry_order_status'] = 'Order Status:';
 $_['entry_geo_zone']     = 'Geo Zone:';
 $_['entry_status']       = 'Status:';
 $_['entry_sort_order']   = 'Sort Order:';
+$_['entry_test_order']   = 'Test Order ID';
+$_['entry_test_order_note'] = 'Use a random number for genarating unique order it for testing (to prevent duplicate order id) ';
+$_['text_test_mode']   = 'Test Mode';
+$_['text_live_mode']   = 'Live Mode';
 
 // Error
 $_['error_permission']   = 'Warning: You do not have permission to modify payment Dialog Ezcash!';

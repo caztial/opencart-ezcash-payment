@@ -31,6 +31,25 @@
             <td><span class="required">*</span><?php echo $entry_pvt_key; ?></td>
             <td><textarea name="ezcash_pvt_key"><?php echo $ezcash_pvt_key; ?></textarea></td>
           </tr>
+	  <tr>
+            <td><span class="required">*</span><?php echo $entry_test; ?></td>
+            <td><select name="ezcash_test">
+                <?php if ($ezcash_test=='t') { ?>
+                <option value="t" selected="selected"><?php echo $text_test_mode; ?></option>
+                <option value="l"><?php echo $text_live_mode; ?></option>
+                <?php } else { ?>
+                <option value="t"><?php echo $text_test_mode; ?></option>
+                <option value="l" selected="selected"><?php echo  $text_live_mode; ?></option>
+                <?php } ?>
+              </select></td>
+          </tr>	
+	  <tr>
+            <td><span class="required">*</span> <?php echo $entry_test_order; ?></td>
+            <td><input type="text" name="ezcash_test_order" value="<?php echo $ezcash_test_order; ?>" />
+             
+              <span class="error"><?php echo $entry_test_order_note;?></span>
+             </td>
+          </tr>
           <tr>
             <td><?php echo $entry_total; ?></td>
             <td><input type="text" name="ezcash_total" value="<?php echo $ezcash_total; ?>" /></td>
