@@ -20,7 +20,7 @@ private $test_order_id=1; // in live mode
 			$this->data['digest'] = '';
 		}
 		if ($this->config->get('ezcash_password')) {
-                        $this->data['callback'] = $this->url->link('payment/ezcash/callback', '', 'SSL');
+            $this->data['callback'] = $this->url->link('payment/ezcash/callback', '', 'SSL');
 			$mcode = $this->data['merchant']; //merchant code
 			$tid = $this->data['trans_id']*$this->test_order_id; // transaction id
 			$tamount = $this->data['amount']; //transaction amount
